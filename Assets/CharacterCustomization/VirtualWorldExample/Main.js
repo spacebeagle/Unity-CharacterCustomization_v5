@@ -4,7 +4,8 @@
 // and places it at a random position.
 while(true)
 {
-	go = Instantiate(prefab);
+    var go: GameObject;
+    go = Instantiate(prefab);
 	go.transform.position = new Vector3(Random.value * 10, 0, Random.value * 10);
 	yield new WaitForSeconds(3);
 }

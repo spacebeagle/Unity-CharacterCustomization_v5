@@ -44,26 +44,26 @@ class Main : MonoBehaviour
         {
             Destroy(character);
             character = generator.Generate();
-            character.animation.Play("idle1");
-            character.animation["idle1"].wrapMode = WrapMode.Loop;
+            character.GetComponent<Animation>().Play("idle1");
+            character.GetComponent<Animation>()["idle1"].wrapMode = WrapMode.Loop;
             newCharacterRequested = false;
 
             // Start the walkin animation for the first character.
             if (!firstCharacter) return;
             firstCharacter = false;
-            if (character.animation["walkin"] == null) return;
+            if (character.GetComponent<Animation>()["walkin"] == null) return;
             
             // Set the layer to 1 so this animation takes precedence
             // while it's blended in.
-            character.animation["walkin"].layer = 1;
+            character.GetComponent<Animation>()["walkin"].layer = 1;
             
             // Use crossfade, because it will also fade the animation
             // nicely out again, using the same fade length.
-            character.animation.CrossFade("walkin", fadeLength);
+            character.GetComponent<Animation>().CrossFade("walkin", fadeLength);
             
             // We want the walkin animation to have full weight instantly,
             // so we overwrite the weight manually:
-            character.animation["walkin"].weight = 1;
+            character.GetComponent<Animation>()["walkin"].weight = 1;
             
             // As the walkin animation starts outside the camera frustrum,
             // and moves the mesh outside its original bounding box,
@@ -78,8 +78,8 @@ class Main : MonoBehaviour
             
             if (nonLoopingAnimationToPlay == null) return;
             
-            character.animation[nonLoopingAnimationToPlay].layer = 1;
-            character.animation.CrossFade(nonLoopingAnimationToPlay, fadeLength);
+            character.GetComponent<Animation>()[nonLoopingAnimationToPlay].layer = 1;
+            character.GetComponent<Animation>().CrossFade(nonLoopingAnimationToPlay, fadeLength);
             nonLoopingAnimationToPlay = null;
         }
     }
@@ -87,7 +87,7 @@ class Main : MonoBehaviour
     void OnGUI()
     {
         if (generator == null) return;
-        GUI.enabled = usingLatestConfig && !character.animation.IsPlaying("walkin");
+        GUI.enabled = usingLatestConfig && !character.GetComponent<Animation>().IsPlaying("walkin");
         GUILayout.BeginArea(new Rect(10, 10, typeWidth + 2 * buttonWidth + 8, 500));
 
         // Buttons for changing the active character.
@@ -162,7 +162,7 @@ class Main : MonoBehaviour
         generator.ChangeElement(catagory, next);
         usingLatestConfig = false;
         
-        if (!character.animation.IsPlaying(anim))
+        if (!character.GetComponent<Animation>().IsPlaying(anim))
             nonLoopingAnimationToPlay = anim;
     }
 }

@@ -232,7 +232,8 @@ public class CharacterGenerator
             if (!CurrentCharacterBase.isDone) return false;
 
             if (!characterBaseRequests.ContainsKey(currentCharacter))
-                characterBaseRequests.Add(currentCharacter, CurrentCharacterBase.assetBundle.LoadAsync("characterbase", typeof(GameObject)));
+                characterBaseRequests.Add(currentCharacter, CurrentCharacterBase.assetBundle.LoadAssetAsync("characterbase", typeof(GameObject)));
+//              characterBaseRequests.Add(currentCharacter, CurrentCharacterBase.assetBundle.LoadAsync("characterbase", typeof(GameObject)));
 
             if (!characterBaseRequests[currentCharacter].isDone) return false;
 
@@ -325,7 +326,7 @@ public class CharacterGenerator
             if (Application.platform == RuntimePlatform.WindowsWebPlayer || Application.platform == RuntimePlatform.OSXWebPlayer)
                 return Application.dataPath+"/assetbundles/";
             else
-                return "file://" + Application.dataPath + "/Assets/assetbundles/";
+                return "file://" + Application.dataPath + "/assetbundles/";
         }
     }
 

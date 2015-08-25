@@ -57,13 +57,16 @@ public class CharacterElement
             if (!WWW.isDone) return false;
 
             if (gameObjectRequest == null)
-                gameObjectRequest = WWW.assetBundle.LoadAsync("rendererobject", typeof(GameObject));
+//                gameObjectRequest = WWW.assetBundle.LoadAsync("rendererobject", typeof(GameObject));
+				gameObjectRequest = WWW.assetBundle.LoadAssetAsync("rendererobject", typeof(GameObject));
 
             if (materialRequest == null)
-                materialRequest = WWW.assetBundle.LoadAsync(name, typeof(Material));
-			
+//				materialRequest = WWW.assetBundle.LoadAsync(name, typeof(Material));
+				materialRequest = WWW.assetBundle.LoadAssetAsync(name, typeof(Material));
+
 			if (boneNameRequest == null)
-                boneNameRequest = WWW.assetBundle.LoadAsync("bonenames", typeof(StringHolder));
+//				boneNameRequest = WWW.assetBundle.LoadAsync("bonenames", typeof(StringHolder));
+				boneNameRequest = WWW.assetBundle.LoadAssetAsync("bonenames", typeof(StringHolder));
 
             if (!gameObjectRequest.isDone) return false;
             if (!materialRequest.isDone) return false;

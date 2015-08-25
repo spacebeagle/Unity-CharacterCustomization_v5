@@ -2,6 +2,9 @@
 var config : String;
 var anim : String = "walk";
 
+var generator: CharacterGenerator;
+var go: GameObject;
+
 // Allow the CharacterElementDatabase to be downloaded.
 while (!CharacterGenerator.ReadyToUse) yield;
 
@@ -28,8 +31,12 @@ go.transform.localPosition = Vector3.zero;
 go.transform.localRotation = Quaternion.identity;
 
 // Play and loop the specified animation.
-go.animation.Play(anim);
-go.animation[anim].wrapMode = WrapMode.Loop;
+var ani:Animation;
+ani = go.GetComponent.<Animation>();
+ani.Play(anim);
+ani[anim].wrapMode = WrapMode.Loop;
+/*go.animation.Play(anim);
+go.animation[anim].wrapMode = WrapMode.Loop;*/
 
 // Stop emitting particles, as the character now exists.
 GetComponentInChildren(ParticleEmitter).emit = false;
